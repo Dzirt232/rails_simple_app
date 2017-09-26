@@ -2,5 +2,7 @@ Rails.application.routes.draw do
   resources :articles do
   	resources :comments
   end
-  root to: 'articles#index'
+  get 'articles' => 'articles#index'
+  get 'tags' => 'tags#index'
+  resources :tags
 end
