@@ -1,3 +1,18 @@
+<h1>Top 3 Articles</h1>
+<ul id="top_articles">
+	<% a=0 %>
+	<% while a < 3 %>
+		<% top = Article.order(:views_counter)%>
+		<% article = top[-1-a] %>
+		<% if !article.nil? %>
+		<li><%= link_to article.title, article_path(article) %></li>
+		<% end %>
+		<% a += 1 %>
+	<% end %>	
+</ul>
+
+<p><br /></p>
+
 <h1>All Articles</h1>
 
 <ul id="articles"> 
@@ -5,8 +20,5 @@
 	 <li><%= link_to a.title, article_path(a), class: 'article_title' %></li>
 	 <% end %>	
 </ul>
-<% if logged_in? %>
-<%= link_to 'Create a New Article', new_article_path, class: 'new_article' %>
-<% end %>
 <p><br /></p>
 <h2 style="font-size: 30px"><%= link_to 'All tags', tags_path %></h2>

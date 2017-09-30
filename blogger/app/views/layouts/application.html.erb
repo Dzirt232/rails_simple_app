@@ -5,6 +5,30 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <style type="text/css">
+  	#side-wide a {
+  		text-decoration: none;
+  		color: #DA3B38;
+  		display: block;
+  		text-align: left;
+  		height: 100%;
+  	}
+  	#side-wide p:hover {
+  		color: #AB6867;
+  		background-color: #77AB67;
+  	}
+  	#top_articles a {
+  		color: red;
+  		font-size: 2em ;
+  		line-height: 25px;
+  	}
+  	#top_articles li{
+  		padding: 20px 0px;
+  	}
+  	#top_articles {
+  		padding: 20px 0px;
+  	}
+  </style>
 </head>
 <body>
   <p class="flash">
@@ -21,9 +45,23 @@
         <% else %>
           <%= link_to "(login)", login_path %>
         <% end %>
-        <%= link_to "back to the title", root_path %>
       </h6>
     </div>
+  </div>
+    <div id="side-wide" style="position: fixed; top: 0px; left: 0px; background-color: #3FBF8A;
+    padding: 0px 0px; border-radius: 0px 5px 5px 5px; font-family: sans-serif; font-size: 1.5em;
+    line-height: 35px; border-width: 1px; border-style: solid;">
+  	<p><%= link_to "All articles", root_path %></p>
+  	<p><%= link_to "All tags", tags_path %></p>
+  	<% if logged_in? %>
+  	<p><%= link_to "Create a new article", new_article_path %></p>
+  	<% end %>
+  	<% if !current_user.nil? %>
+  	<% if current_user.email == "Dzirt@mail.com" && current_user.username == "Dzirt" %>
+  	<p><%= link_to "Add a new Author", new_author_path %></p>
+  	<p><%= link_to "All Authors", authors_path %></p>
+  	<% end %>
+  	<% end %>
   </div>
 </body>
 </html>

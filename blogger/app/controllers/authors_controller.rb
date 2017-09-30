@@ -1,7 +1,10 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
 before_filter :zero_authors_or_authenticated, only: [:new, :create]
+before_filter :admin?, only: [:new, :create, :show, :edit, :update, :destroy, :index]
+
 before_filter :require_login, except: [:new, :create]
+
 
 def zero_authors_or_authenticated
   unless Author.count == 0 || current_user
@@ -9,6 +12,7 @@ def zero_authors_or_authenticated
     return false
   end
 end
+
 
   # GET /authors
   # GET /authors.json
@@ -79,5 +83,18 @@ end
     # Never trust parameters from the scary internet, only allow the white list through.
     def author_params
       params.require(:author).permit(:username, :email, :password, :password_confirmation)
+    end
+
+      def admin?
+        if !current_user.nil?
+    if current_user.email == "Dzirt@mail.com" && current_user.username == "Dzirt"
+      return true
+    else
+      redirect_to root_path
+      return false  
+    end
+  else
+    return false
+  end
     end
 end

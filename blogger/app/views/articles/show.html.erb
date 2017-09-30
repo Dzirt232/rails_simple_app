@@ -16,6 +16,7 @@
 <%= render partial: 'articles/comment', collection: @article.comments %>
 
 <%= render partial: 'comments/form' %>
+<h3>Views (<%= @views_counter.to_s %>)</h3>
 <% if logged_in? %>
 <%= link_to 'delete', article_path(@article),method: :delete, data: {confirm: 'Really delete the article?'} %>
 <%= link_to 'edit',edit_article_path(@article) %>
