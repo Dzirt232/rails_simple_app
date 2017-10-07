@@ -2,7 +2,7 @@ class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
 before_filter :zero_authors_or_authenticated, only: [:new, :create]
 before_filter :admin?, only: [:new, :create, :show, :edit, :update, :destroy, :index]
-
+before_filter :admin?, except: [:new, :create, :index]
 before_filter :require_login, except: [:new, :create]
 
 

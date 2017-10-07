@@ -1,6 +1,7 @@
 <h1>Top 3 Articles</h1>
 <ul id="top_articles">
 	<% a=0 %>
+	<% if Article.count  > 0 %>
 	<% while a < 3 %>
 		<% top = Article.order(:views_counter)%>
 		<% article = top[-1-a] %>
@@ -8,6 +9,7 @@
 		<li><%= link_to article.title, article_path(article) %></li>
 		<% end %>
 		<% a += 1 %>
+	<% end %>
 	<% end %>	
 </ul>
 
